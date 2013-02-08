@@ -1,0 +1,25 @@
+[DatawareResource]
+port: 	       <%=port%>
+resource_name: <%=resourcename%> 
+resource_uri:  http://<%=resourcename%>.<%=@fqdn%>
+realm:         http://<%=resourcename%>.<%=@fqdn%>
+
+[DatawareResources]
+<%= "resources: {" -%>
+<% resources[0..-2].each do |resource| -%>
+   <%= "\"" + resource + "\":{\"resource_uri\":\"http://" + resourcename + "." + @fqdn + "\"}," -%>
+<% end -%>
+<%= "\"" + resources.last + "\":{\"resource_uri\": \"http://" + resourcename + "." + @fqdn + "\"}" -%>
+<%= "}" %>
+
+[DatawareDB]
+hostname: 127.0.0.1
+username: <%=db_user%> 
+password: <%=db_password%> 
+dbname:   <%=dataware_db%>
+
+[ResourceDB]
+hostname: 127.0.0.1
+username: <%=db_user%>   
+password: <%=db_password%>   
+dbname:   <%=resource_db%>
