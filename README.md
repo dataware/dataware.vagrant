@@ -14,11 +14,15 @@ Once you have this installed, clone this repo:
 
 git clone git://github.com/horizon-institute/dataware.vagrant.git
 
-This will create three directories under dataware.vagrant:
+This will create three directories and a vagrant box template under dataware.vagrant:
 
-    dataware-catalog_puppet		dataware-client_puppet		dataware-resource_puppet
+    dataware-catalog_puppet		dataware-client_puppet		dataware-resource_puppet	dataware.box
     
-Each directory has Vagrantfile which configures and specifies the base virtual machine.   There is a set of puppet manifest files and an init.sh script.  All of these are available under /vagrant on your virtual machine.  To get started, cd to one of the directories:
+Each directory has Vagrantfile which configures and specifies the base virtual machine.   There is a set of puppet manifest files and an init.sh script.  All of these are available under /vagrant on your virtual machine.  To get started, you need to install the base vagrant box:
+	
+    vagrant box add dataware_squeeze64 dataware.box
+
+now cd to one of the directories:
 
     cd dataware-catalog_puppet
     
