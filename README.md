@@ -55,7 +55,7 @@ For the dataware-resource:
     
 And for the dataware-client:
 
-     http://192.168.33.11:8080
+     http://192.168.33.15:9090
      
 To modify how the vms are built, take a look at /usr/share/puppet/modules/dataware-[catalog|client|resource]/manifests
 
