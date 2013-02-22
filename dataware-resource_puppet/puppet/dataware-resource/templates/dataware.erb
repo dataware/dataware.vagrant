@@ -7,9 +7,9 @@ realm:         http://<%=@ipaddress_eth1-%>:<%=port%>
 [DatawareResources]
 <%= "resources: {" -%>
 <% resources[0..-2].each do |resource| -%>
-   <%= "\"" + resource + "\":{\"resource_uri\":\"http://" +  @ipaddress_eth1 + "/" + resource_name + ":" + port + "\"}," -%>
+   <%= "\"" + resource + "\":{\"resource_uri\":\"http://" +  @ipaddress_eth1 + "/" + resourcename + ":" + port + "\"}," -%>
 <% end -%>
-<%= "\"" + resources.last + "\":{\"resource_uri\": \"http://" + @ipaddress_eth1 + "/" + resource_name + ":" + port + "\"}" -%>
+<%= "\"" + resources.last + "\":{\"resource_uri\": \"http://" + @ipaddress_eth1 + "/" + resourcename + ":" + port + "\"}" -%>
 <%= "}" %>
 
 [DatawareDB]
