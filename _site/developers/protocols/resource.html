@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dataware - the resource protocol</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        
+        <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+	    <style>
+	        body{
+	            padding-top:60px;
+	        }   
+	    </style>
+    </head>
+    <body>
+    
+    
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="#">Becoming dataware</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+          <div class="site">
+            <div class="row">
+                <div class="span3">
+                    <ul class="nav nav-list">
+                    
+                        
+                        
+                        
+                            
+                            
+                                <li class="nav-header">overview</li>
+                            
+                         
+                            
+                            
+                                <li >
+                                    <a href="/" title="">introduction</a>
+                                </li>
+                            
+                         
+                            
+                            
+                                <li class="nav-header">getting started</li>
+                            
+                         
+                            
+                            
+                                <li >
+                                    <a href="/getting_started/dataware_resource/" title="">the resource</a>
+                                </li>
+                            
+                         
+                            
+                            
+                                <li >
+                                    <a href="/getting_started/dataware_catalog/" title="">the catalog</a>
+                                </li>
+                            
+                         
+                            
+                            
+                                <li >
+                                    <a href="/getting_started/dataware_client/" title="">the client</a>
+                                </li>
+                            
+                         
+                            
+                            
+                                <li class="nav-header">for developers</li>
+                            
+                         
+                            
+                            
+                                <li >
+                                    <a href="/developers/protocols/overview.html" title="">overview</a>
+                                </li>
+                            
+                         
+                            
+                            
+                                <li class="active">
+                                    <a href="/developers/protocols/resource.html" title="">the resource protocol</a>
+                                </li>
+                            
+                         
+                            
+                            
+                                <li >
+                                    <a href="/developers/protocols/client.html" title="">the client protocol</a>
+                                </li>
+                            
+                         
+                            
+                            
+                                <li class="nav-header">the home hub (dreamplug)</li>
+                            
+                            
+                    </ul>
+                    
+                    <!--<ul class="nav nav-list">
+                        <li class="nav-header">Overview</li>
+                        <li class="active"><a href="/">introduction</a></li>
+                        <li class="nav-header">Getting Started</li>
+                        <li><a href="#">the resource</a></li>
+                        <li><a href="#">the catalog</a></li>
+                        <li><a href="#">the client</a></li>
+                        <li class="nav-header">For developers</li>
+                        <li><a href="#">the resource</a></li>
+                        <li><a href="#">the catalog</a></li>
+                        <li><a href="#">the client</a></li>
+                        <li><a href="#">notes on packaging</a></li>
+                        <li class="nav-header">The dreamplug</li>
+                        <li><a href="#">notes</a></li>
+                    </ul>-->
+                    
+                    <!--<ul class="nav nav-pills nav-stacked">
+                        
+		                    
+ 		                        
+		                    
+                        
+		                    
+ 		                        
+		                    
+                        
+		                    
+ 		                        
+		                    
+                        
+		                    
+ 		                        
+			                        <li> <a href="/getting_started/dataware_catalog/">dataware catalog</a></li>
+		                        
+		                    
+                        
+		                    
+ 		                        
+			                        <li> <a href="/getting_started/dataware_client/developers/">dataware client - for developers</a></li>
+		                        
+		                    
+                        
+		                    
+ 		                        
+			                        <li> <a href="/getting_started/dataware_client/">dataware client</a></li>
+		                        
+		                    
+                        
+		                    
+ 		                        
+			                        <li> <a href="/getting_started/dataware_client/install/">dataware client - install</a></li>
+		                        
+		                    
+                        
+		                    
+ 		                        
+			                        <li> <a href="/getting_started/dataware_client/overview/">dataware client - overview</a></li>
+		                        
+		                    
+                        
+		                    
+ 		                        
+			                        <li> <a href="/getting_started/dataware_resource/">dataware resource</a></li>
+		                        
+		                    
+                        
+		                    
+ 		                        
+		                    
+                        
+		                    
+ 		                        
+			                        <li> <a href="/intro/">introduction</a></li>
+		                        
+		                    
+                        
+                    </ul>-->
+                </div>
+	            <div class="span9">
+	                 <h1 id='dataware_v2__resource_protocol'>Dataware v2 - Resource Protocol</h1>
+
+<h2 id='introduction'>Introduction</h2>
+
+<p>This document describes the <strong>Resource Protocol</strong> - if you are writing a <strong>Dataware Resource</strong>, this is the protocol you should follow.</p>
+
+<h2 id='protocol_entities'>Protocol Entities</h2>
+
+<p>In the Resource Protocol, 3 Dataware entities are involved, taking on the following <a href='http://tools.ietf.org/html/draft-ietf-oauth-v2-22'>OAuth 2.0</a> roles:</p>
+
+<ul>
+<li><strong>The Dataware User:</strong> The person who owns the data, and is responsible for its control. In OAuth terminology, this is the <em>resource owner</em> (an entity capable of granting access to a protected resource (e.g. end-user).</li>
+
+<li><strong>The Dataware Resource:</strong> The home of the data under consideration. For the <em>Resource Installation</em> part of the dataware protocol, this actually takes on the role of the <em>client</em> in OAuth terminology (it is asking for authorization to link to the Catalog), although once installed it will become a resource provider.</li>
+
+<li><strong>The Catalog:</strong> The server acting as the dataware user&#8217;s representative. For the <em>Resource Installation</em> part of the dataware protocol, in OAuth terminology the catalog is taking the role of both the <em>authorization server</em> and the <em>resource</em>server_.</li>
+</ul>
+
+<h2 id='protocol_flow'>Protocol Flow</h2>
+
+<p>There are 5 stages to the Resource Installation protocol (although the last two stages refer to processing requests rather than installation <em>per se</em>):</p>
+
+<ol>
+<li><a href='#Resource_Registration'>Resource Registration</a></li>
+
+<li><a href='#Installation_Request_Submission'>Installation Request</a></li>
+
+<li><a href='#Installation_Authorization'>Access Token Retrieval</a></li>
+
+<li><a href='#Processing_Request_Approval'>Processing Request Approval</a></li>
+
+<li><a href='#Processing_Invocation'>Processing Invocation</a><img src='/assets/img/resource_installation.png' /></li>
+</ol>
+<div id='Resource_Registration' />
+<h2 id='1_resource_registration'>1. Resource Registration</h2>
+
+<p>The workflow begins with the User requesting that the resource starts the installation process (normally via some form of HTML interaction, as indicated by the &#8220;install&#8221; request in the diagram). If it has not done so in the past, the Resource must first register at the user&#8217;s Catalog (which it therefore must have previously obtained the address) before taking any further steps. If the Catalog accepts the credentials that the Resource presents to it, it returns an identifying <strong>resource_id</strong>, that the Resource will use in the rest of the process, and indeed in all future communications.</p>
+
+<h3 id='11_resource_registration_request'>1.1 Resource Registration request</h3>
+
+<p>To register the Client sends a GET request to the Catalog&#8217;s <strong>resource_register</strong> endpoint, specifying the following credentials:</p>
+
+<ul>
+<li>
+<p><strong>resource_name:</strong> A unique name for the Resource. This will be presented to Dataware Users when they are presented with an installation request. Text only and limited to 128 characters. Only one resource of any given name may be registered at a catalog.</p>
+</li>
+
+<li>
+<p><strong>redirect_uri:</strong> After completing its interaction with a Dataware User, the Resource will redirect their browser back to this URI (which may contain a query component but must not include a fragment component, as per <a href='http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-3.1.2'>oauth-v2-22</a>).</p>
+</li>
+
+<li>
+<p><strong>namespace:</strong> (optional) An dataware namespace entry for the Dataware Resource that indicates the type of resource (e.g. &#8221; http://www.mydataware.info/prefstore &#8220;).</p>
+</li>
+
+<li>
+<p><strong>description:</strong> (optional) An optional description of the Resource, its remit and its functionality. This will again be presented to Dataware users when installation requests occur. Text only and limited to 1024 characters.</p>
+</li>
+
+<li>
+<p><strong>logo_uri:</strong> (optional) An optional URI link to a logo representing the Dataware Resource.</p>
+</li>
+
+<li>
+<p><strong>web_uri:</strong> (optional) An optional URI link to the website representing the Resource.</p>
+</li>
+</ul>
+
+<p>For example:</p>
+
+<pre><code>POST CATALOG/resource_register
+     resource_name=example-resource&amp;redirect_uri=https%3A%2F%2Fexample%2Ecom%2Fredirect</code></pre>
+
+<h3 id='12_registration_success'>1.2 Registration success</h3>
+
+<p>If the Catalog decides to accept the registration request, it records the parameters specified by the Dataware Resource (hence allowing them to be cross-referenced by a dataware user against any future processing requests), and issues the newly registered Resource a <strong>resource_id</strong>, via a json response. For example:</p>
+
+<pre><code>{&quot;success&quot;:true,&quot;resource_id&quot;:&quot;r47bb8eqrf90hn230fua9sbn2&quot;}</code></pre>
+
+<p>This <strong>resource_id</strong> a unique string representing the registration information they provided, and is used as identification by the client in subsequent processing requests to dataware user managed by the Catalog.</p>
+
+<h3 id='13_registration_failure'>1.3 Registration failure</h3>
+
+<p>If the Catalog rejects the registration request, it returns an appropriate json response, denoting the <strong>error</strong> (<strong>&#8220;catalog_denied&#8221;</strong> or <strong>&#8220;catalog_problems&#8221;</strong>), and providing a textual description of the error via an <strong>error_description</strong>:</p>
+
+<pre><code>{&quot;success&quot;:false,&quot;error&quot;:&quot;catalog_denied&quot;,&quot;error_description&quot;:&quot;A client with that name already exists in the catalog&quot;}</code></pre>
+<div id='Installation_Request_Submission' />
+<h2 id='2_installation_request'>2. Installation Request</h2>
+
+<p>Assuming that the Dataware Resource has been registered with the Catalog, it may then request installation to user accounts on that Catalog. If successful, this will result in the Resource receiving an <strong>access_token</strong> confirming installation for some User on the Catalog (this access_token also serving as a security credential for future communications between the resource and catalog for that user).</p>
+
+<p>The Resource initiates the installation by redirecting the user&#8217;s browser to the Catalog&#8217;s <strong>resource_request</strong> endpoint. The Resource includes the following parameters:</p>
+
+<ul>
+<li>
+<p><strong>resource_id:</strong> as obtained when the Dataware Resource registered, to identify the resource.</p>
+</li>
+
+<li>
+<p><strong>redirect_uri:</strong> the URL that the resource wants the User&#8217;s browser to be redirected back to, after they have accepted or reject the installation request at the Catalog. This must be the same as the one the Resource specified when it registered.</p>
+</li>
+
+<li>
+<p><strong>state:</strong> an internal identifier that the Resource may use to keep track of their installation request.</p>
+</li>
+</ul>
+
+<p>As per the OAuth standard, there is also an implicit parameter <strong>response_type</strong> which has a value of &#8220;code&#8221; - the Dataware Resource need not send this parameter as it will be added by default. For example, the Resource directs the users browser to make the following HTTP request using transport-layer security (extra line breaks are for display purposes only):</p>
+
+<pre><code>GET CATALOG/resource_request?resource_id=RESOURCE_ID
+     &amp;state=1234&amp;redirect_uri=https%3A%2F%2Fexample%2Ecom%2Fredirect</code></pre>
+
+<p>Note that the Resource must have already obtained the user&#8217;s CATALOG_URI for this redirection to be possible.</p>
+
+<p>When the user&#8217;s browser redirects this request to the Catalog, the Catalog subsequently validates it to ensure all required parameters are present and valid. If the request is valid, the Catalog authenticates the Dataware User and obtains an authorization decision (by asking the Dataware User directly via html interaction).</p>
+
+<h3 id='21_installation_rejection'>2.1 Installation Rejection</h3>
+
+<p>If the Dataware User denies the installation request, the Catalog notifies the Resource by redirecting the user’s browser (via an HTTP 302 GET) to the <strong>redirect_uri</strong> specified by the Dataware Resource (see §3), along with an <strong>&#8220;access_denied&#8221;</strong> error parameter (again taken from <a href='http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-4.1.2'>oauth-v2-22</a>) and an appropriate <strong>error_description</strong>. Also attached is the <strong>&#8220;state&#8221;</strong> specified by the client when it made the original request, so as that the request can be identified. An example of such a redirect is illustrated below:</p>
+
+<pre><code> GET REDIRECT_URI?state=1234&amp;error=access_denied&amp;error_description=The+user+denied+your+request  </code></pre>
+
+<h3 id='22_installation_acceptance'>2.2 Installation Acceptance</h3>
+
+<p>If the Dataware-user accepts the Resource&#8217;s installation, the Catalog issues an authorization code and delivers it to the Resource by redirecting the user&#8217;s browser to the Resource&#8217;s <strong>redirect_uri</strong>, attaching an authorization <strong>code</strong> along with the <strong>state</strong> identifier specified by the client in their submission. For example the Client could be contacted via:</p>
+
+<pre><code> GET REDIRECT_URI?state=1234&amp;code=HTQljz7Agfr2P1ckdPP9Lqrz4BJlNDAqHKS54QDL5cM=</code></pre>
+<div id='Installation_Authorization' />
+<h2 id='3_access_token_retrieval'>3. Access Token Retrieval</h2>
+
+<p>The Dataware Resource now has in its possession an <strong>authorization_code</strong>, and can proceed to the step of swapping this for the <strong>access token</strong> proper that confirms its installation. It does this by performing a GET request the to the <strong>resource_access</strong> endpoint, attaching the <strong>redirect_uri</strong> it specified when registering with the Catalog (see §1.1), as well as the request&#8217;s authorization <strong>code</strong> (see §4.2) and a <strong>grant_type</strong> parameter of <strong>&#8220;authorization_code&#8221;</strong>, again in line with <a href='http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-4.1.3'>oauth-v2-22</a>). For example the Resource would issue a request such as:</p>
+
+<pre><code>GET CATALOG/resource_access?grant_type=authorization_code
+  &amp;redirect_uri=https%3A%2F%2Fexample%2Ecom%2Fredirect
+  &amp;code=HTQljz7Agfr2P1ckdPP9Lqrz4BJlNDAqHKS54QDL5cM=</code></pre>
+
+<h3 id='31_token_retrieval_success'>3.1 Token Retrieval Success</h3>
+
+<p>If all is in order the Catalog will release the <strong>access_token</strong>, by answering the GET request with the following JSON response:</p>
+
+<pre><code>{&quot;success&quot;:true,&quot;access_token&quot;:ACCESS_TOKEN}</code></pre>
+
+<p>This <strong>access_token</strong> must now be used in all communications between the Catalog and the Dataware Resource as an identity credential.</p>
+
+<p>At this point, the Dataware Resource&#8217;s installation is complete.</p>
+
+<h3 id='32_token_retrieval_failure'>3.2 Token Retrieval Failure</h3>
+
+<p>If there is a problem then the notification will return a JSON failure response explaining why, such as:</p>
+
+<pre><code>{&quot;success&quot;:false,&quot;error&quot;:&quot;invalid_request&quot;, &quot;error_description&quot;:&quot;Request is missing either the authorization code or redirect_uri&quot;}</code></pre>
+
+<p>Possible error reasons are <strong>unsupported_grant_type</strong> (if the grant_type is incorrectly specified), <strong>&#8220;invalid_request&#8221;</strong> (the request is missing either the authorization code or redirect_uri), <strong>&#8220;invalid_grant&#8221;</strong> (the requested authorization code/redirect_uri pair is either invalid or has expired) or &#8220;server_error&#8221; (The Catalog encountered unexpected problems, preventing it from fulfilling the request).</p>
+<div id='Processing_Request_Approval' />
+<h2 id='4_permitting_a_processing_request'>4. Permitting a Processing Request</h2>
+
+<p>When a third party client request to process data in the Resource is authorized by the data owner, the owner&#8217;s Catalog will contact the Resource in order to seek final approval. It does this via a POST request to the <strong>permit_processor</strong> endpoint (that all Dataware Resources <strong>must</strong> hence support) along with the following parameters:</p>
+
+<ul>
+<li><strong>install_token</strong>: this is the access_token that the resource received was installed by the user at their Catalog. This token allows the resource to identify who is the target of the third party&#8217;s query.</li>
+
+<li><strong>client_id</strong>: The id given to the interested third-party client when it registered at the user&#8217;s Catalog.</li>
+
+<li><strong>query</strong>: a python function called <strong>run( parameters )</strong>. No imports are permitted, so only libraries installed on the Resource server may be used (the Resource server should indicate it in its documentation what libraries are available in its processing module).</li>
+
+<li><strong>expiry_time</strong>: a UNIX UTC timestamp (in seconds) indicating the expiry time of the query, after which it may no longer be invoked.</li>
+</ul>
+
+<p>Having been given with these parameters, the Resource must then decide whether it is happy (or capable) of supporting the processing request that the user has authorized.</p>
+
+<h3 id='41_processing_request_rejection'>4.1 Processing Request Rejection</h3>
+
+<p>If the Resource decides it cannot support the processing request it must reply with an appropriate error response, as follows:</p>
+
+<pre><code>{&quot;success&quot;:false,&quot;error&quot;:&quot;registration_failure&quot;,&quot;error_description&quot;:&quot;An identical request already exists&quot;}</code></pre>
+
+<p>The error types and messages are specific to the Dataware Resource, but may be passed on by the Catalog to the interested third-party to notify them of the reason for the failure of their processing request.</p>
+
+<h3 id='42_processing_request_acceptance'>4.2 Processing Request Acceptance</h3>
+
+<p>If the Resource accepts the processing request, it must record the details of the request in preparation for invocation (see §5) and additionally generate an <strong>access_token</strong> that the third-party will be required to present on attempting invocation. It must then return this token (which the Catalog will pass on to the third-party) via a successful JSON response of the form:</p>
+
+<pre><code>{&quot;success&quot;:true, &quot;access_token&quot;:&quot;jf01kklNQP=Lqz7P1fzgfrDiw92d545cM8PzTQljLqz2KSDzp&quot;}</code></pre>
+<div id='Processing_Invocation' />
+<h2 id='5_processing_invocation'>5. Processing Invocation</h2>
+
+<p>With a valid access token in its possession, the third-party can now query the Resource, asking it to invoke the processor it has had authorized by the user and approved by the Resource. The Client achieves this by making a GET request to the Resource&#8217;s <strong>invoke_processor</strong> endpoint, which any Dataware Resource is mandated to support. The third-party must attach the <strong>access_token</strong> that the Resource delivered to the Catalog in §4.2, as well as any <strong>parameters</strong> that are necessary for the invocation of the python function tied to the request. Thus the Resource must support the following GET request:</p>
+
+<pre><code>GET RESOURCE_ACCESS_URI/invoke_processor
+    ?access_token=ACCESS_TOKEN&amp;parameters=JSON_OBJECT_OF_PARAMETERS</code></pre>
+
+<h3 id='51_processing_invocation_failure'>5.1 Processing Invocation Failure</h3>
+
+<p>If the user has revoked access, the supplied access token has expired, or there are any other problems causing the invocation to be denied, the Resource provider must issue an HTTP 400, and returning the following JSON error in the body of the message:</p>
+
+<pre><code>{
+   &quot;success&quot;:false,
+   &quot;error&quot;:&quot;access_exception&quot;,
+   &quot;error_description&quot;:&quot;Invalid access token.&quot; 
+}</code></pre>
+
+<p>The error messages and descriptions are designated by the specific Resource, and outside the scope of this protocol (the resource should document these).</p>
+
+<h3 id='52_processing_invocation_success'>5.2 Processing Invocation Success</h3>
+
+<p>However, if all is fine, supplied parameters must be converted from JSON into <em>python</em> types, fed into the <font face='courier'>**run**</font> function of the registered query (that the Resource has cross referenced to the supplied access token) and the processor code invoked. The code will be processed and a success message must be returned to the user (again in JSON), including the results of the processing:</p>
+
+<pre><code>{
+    &quot;success&quot;:true,
+    &quot;return&quot;:JSON_REPRESENTATION_OF_PROCESSOR_OUTPUT
+}</code></pre>
+
+<p>If for some reason processing fails (perhaps parameters fail invariance checks for example), an error message should be returned in the form:</p>
+
+<pre><code>{
+    &quot;success&quot;:false,
+    &quot;error&quot;:&quot;processing_exception&quot;,
+    &quot;error_description&quot;:&quot;run-time error running the processor. Invariance checks failed.&quot; 
+}</code></pre>
+
+<p>Again individual resource providers will specify appropriate error messages for their particular implementations.</p>
+	            </div>
+	        </div>
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

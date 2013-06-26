@@ -7,23 +7,77 @@
         <meta name="viewport" content="width=device-width">
 
         <!-- syntax highlighting CSS -->
-        <link rel="stylesheet" href="./css/syntax.css">
+        <link rel="stylesheet" href="/css/syntax.css">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
-
+        
+        <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+	    <style>
+	        body{
+	            padding-top:60px;
+	        }   
+	    </style>
     </head>
     <body>
-
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-              <a class="extra" href="/">home</a>
+    
+    
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="#">Becoming dataware</a>
             </div>
-     
-                {{ content }}
-
+        </div>
+    </div>
+    <div class="container">
+          <div class="site">
+            <div class="row">
+                <div class="span3">
+                    <ul class="nav nav-list">
+                    
+                        {% assign url = page.url|remove:'index.html' %}
+                        
+                        {% for link in site.navigation %}
+                            {% assign active = nil %}
+                            {% if link.header != nil %}
+                                <li class="nav-header">{{link.text}}</li>
+                            {% else %}
+                                <li {% if url == link.url %}class="active"{% endif %}>
+                                    <a href="{{link.url}}" title="{{link.title}}">{{link.text}}</a>
+                                </li>
+                            {% endif %}
+                         {% endfor %}   
+                    </ul>
+                    
+                    <!--<ul class="nav nav-list">
+                        <li class="nav-header">Overview</li>
+                        <li class="active"><a href="/">introduction</a></li>
+                        <li class="nav-header">Getting Started</li>
+                        <li><a href="#">the resource</a></li>
+                        <li><a href="#">the catalog</a></li>
+                        <li><a href="#">the client</a></li>
+                        <li class="nav-header">For developers</li>
+                        <li><a href="#">the resource</a></li>
+                        <li><a href="#">the catalog</a></li>
+                        <li><a href="#">the client</a></li>
+                        <li><a href="#">notes on packaging</a></li>
+                        <li class="nav-header">The dreamplug</li>
+                        <li><a href="#">notes</a></li>
+                    </ul>-->
+                    
+                    <!--<ul class="nav nav-pills nav-stacked">
+                        {% for page in site.html_pages %}
+		                    {% if page.title %}
+ 		                        {% if page.showinnav == true %}
+			                        <li> <a href="{{page.url | remove:'index.html'}}">{{page.title}}</a></li>
+		                        {% endif %}
+		                    {% endif %}
+                        {% endfor %}
+                    </ul>-->
+                </div>
+	            <div class="span9">
+	                 {{ content }}
+	            </div>
+	        </div>
             <div class="footer">
               <div class="contact">
                 <p>

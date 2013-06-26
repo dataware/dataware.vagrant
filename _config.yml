@@ -1,2 +1,25 @@
-name: Your New Jekyll Site
+name: Becoming Dataware documentation 
 pygments: true
+navigation:
+-   text: overview
+    header: yes
+-   text: introduction
+    url: /
+-   text: getting started
+    header: yes
+-   text: the resource
+    url: /getting_started/dataware_resource/
+-   text: the catalog
+    url: /getting_started/dataware_catalog/
+-   text: the client
+    url: /getting_started/dataware_client/
+-   text: for developers
+    header: yes    
+-   text: overview
+    url: /developers/protocols/overview.html
+-   text: the resource protocol
+    url: /developers/protocols/resource.html
+-   text: the client protocol
+    url: /developers/protocols/client.html
+-   text: the home hub (dreamplug)
+    header: yes       
